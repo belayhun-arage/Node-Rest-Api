@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %> 
+<body>
+    <div class="container">
+    <%- include('./partials/nav.ejs') %> 
+    <div class="details">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <h1 class="text-center display-4 my-4"><%= blog.title %> </h1>
+            <div class="content">
+                <h3><%= blog.snippet %></h3>
+                <h4><%= blog.discription %></h4>
+                <!-- <img src="/Uploads/images/" alt="Missing Image"> -->
+                <video  controls>
+                    <source src="/Uploads/images/<%=blog.img%> type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video>
+            </div>
+            <a class="delete" data-doc="<%= blog._id %>">delete</a>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+
+    
+    <%- include('./partials/footer.ejs') %>
+    <script>
+        const trashcan = document.querySelector('a.delete');
+
+        trashcan.addEventListener('click',(e)=>{
+            //prepare the url where the delete requiest will be sent
+            const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+            //use the fetch api
+            //ajax requiest
+            fetch(endpoint,{
+                method : "DELETE"
+            })
+            .then((response)=>response.json())
+            .then((data)=>window.location.href= data.redirect)
+            .catch((err)=>console.log(err));
+        })
+    </script>
+</body>
+</html>

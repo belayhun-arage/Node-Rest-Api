@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %> 
+<body>
+    <%- include('./partials/nav.ejs') %> 
+    <section style="background-color: darkgray;">
+    <div class="blogs content">
+        <h2>All Blogs</h2>
+        <% if(blogs.length >0) { %> 
+                <% blogs.forEach(blog=>{ %> 
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <a class="single" href="/blogs/<%=blog._id %> ">
+                                    <h1 class="title"><%= blog.title %> </h1>
+                                    <h2 class="snippet"><%= blog.snippet %> </h2>
+                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %> 
+        <% } %> 
+    </div>
+</section>
+</body>
+</html>
